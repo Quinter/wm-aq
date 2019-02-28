@@ -5,24 +5,17 @@ class Results extends React.Component {
 	render() {
 		const { questions } = this.props;
 		const questionResults = questions.map((value, index) => {
-			console.log(value)
-			let isAnswer = parseInt(value.selectedAnswer) === index;
-			console.log(value.selectedAnswer)
-			console.log(index);
-			console.log(isAnswer);
-				if (isAnswer) {
-					return (
-						<ResultCard 
-							key={index}
-							questionId={index}
-							question={value.question}
-							answer={value.answers[index]}
-						/>
-					)
-				} else {
-					return;
-				}
-			})
+			let { question, selectedAnswer} = value;
+			let answer = value.answers[selectedAnswer];
+			return (
+				<ResultCard 
+					key={index}
+					questionId={index}
+					question={question}
+					answer={answer}
+				/>
+			)
+		})
 		return (
 			<div className="resultsContainer">
 				<h2>Results</h2>
