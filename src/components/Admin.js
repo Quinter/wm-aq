@@ -1,16 +1,14 @@
 import React from 'react';
+import EntryCard from './EntryCard';
 
 class Admin extends React.Component {
-	constructor(props) {
-		super(props);
-		// this.state = {
-		// 	questionData: []
-		// };
-	}
 
 	render () {
 		return (
-			<h2>Admin</h2>
+			<div className="admin-container">
+				<h2>Admin</h2>
+				<EntryCard />
+			</div>
 		);
 	}
 	

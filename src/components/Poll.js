@@ -1,12 +1,6 @@
 import React from 'react';
 
 class Poll extends React.Component {
-	constructor(props) {
-		super(props);
-		// this.state = {
-		// 	questionData: []
-		// };
-	}
 
 	render () {
 		return (

@@ -8,29 +8,37 @@ import './App.css';
 import Admin from './components/Admin';
 import Results from './components/Results';
 import Poll from './components/Poll';
+import Login from './components/Login';
 
-const App = () => (
-  <Router>
-    <div>
-		<ul>
-				<li>
-					<Link to="/admin">Admin</Link>
-				</li>
-				<li>
-					<Link to="/poll">Poll</Link>
-				</li>
-				<li>
-					<Link to="/results">Results</Link>
-				</li>
-			</ul>
+class App extends React.Component {
 
-			<hr />
+	render() {
+		return(
+		<Router>
+			<div>
+			<ul>
+					<li>
+						<Link to="/admin">Admin</Link>
+					</li>
+					<li>
+						<Link to="/poll">Poll</Link>
+					</li>
+					<li>
+						<Link to="/results">Results</Link>
+					</li>
+					<li>
+						<Link to="/login">Login</Link>
+					</li>
+				</ul>
 
-			<Route exact path="/" component={App} />
-			<Route path="/results" component={Results} />
-			<Route path="/poll" component={Poll} />
-			<Route exact path="/admin" component={Admin} />
-    </div>
-  </Router>
-)
+				<hr />
+				<Route exact path="/" component={Login} />
+				<Route exact path="/results" component={Results} />
+				<Route exact path="/poll" component={Poll} />
+				<Route exact path="/admin" component={Admin} />
+				<Route exact path="/login" component={Admin} />
+			</div>
+		</Router>
+	)}
+}
 export default App;
