@@ -1,60 +1,45 @@
 import React from 'react';
 
 class EntryCard extends React.Component {
-	state = {
-		question: "",
-		answers: [""]
-	}
-	// this.handleChange = this.handleChange.bind(this);
-	// this.handleSubmit = this.handleSubmit.bind(this);
-	
-	handleChange = (event) => {
-		if(event.target.type === "textarea") {
-			this.setState({question: event.target.value });
-		} else {
-			let answers = [...this.state.answers];
-			answers[event.target.id] = event.target.value;
-			this.setState({answers});
-		}
-	}
-
-	handleSubmit = (event) => {
-		event.preventDefault();
-
-	}
 
 	addAnswer = (event) => {
-		this.setState((prevState) => ({
-			answers: [...prevState.answers, ''],
-		}));
+		this.props.addAnswer(event);
 	}
 
 	removeAnswer = (event) => {
 
 	}
 
+	handleChange = (event) => {
+		this.props.onQuestionChange(event);
+	}
+
+	handleSubmit = (event) => {
+		event.preventDefault();
+		this.props.onQuestionSubmit(event);
+	}
 
 	render () {
-		const { answers } = this.state;
+		const { answers, questionId } = this.props;
 		const answerFields = answers.map((value, index) => {
 				return (
 					<div key={index}>
 						<label htmlFor={index}>Answer {index + 1}</label>
-						<input type="text" id={index} value={answers[index]} onChange={this.handleChange} />
+						<input type="text" data-answer-id={index} data-question-id={questionId} value={answers[index]} onChange={this.handleChange} />
 					</div>
 				)
 		})
 		return (
-			<div className="entryCard">
-				<form onSubmit={this.handleSubmit}>
+			<div key={this.props.index} className="entryCard">
+				<form onSubmit={this.handleSubmit} >
 					<label>Question
-						<textarea value={this.state.question} onChange={this.handleChange} />
+						<textarea data-question-id={questionId} value={this.props.question} onChange={this.handleChange}/>
 					</label>
 					<div className="answers-container">
 						{answerFields}
 					</div>
-					<button onClick={this.addAnswer}>+</button>
-					<input type="submit" value="Submit" />
+					<button data-question-id={questionId} onClick={this.addAnswer}>+</button>
+					<input data-question-id={questionId} type="submit" value="Submit" />
 				</form>
 			</div>
 		);
