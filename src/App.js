@@ -11,7 +11,82 @@ import Poll from './components/Poll';
 import Login from './components/Login';
 
 class App extends React.Component {
+	state = {
+		questions: [
+			{ question: "", answers: [], selectedAnswer: null }
+		]	
+	}
+	handleAdminChange = (event) => {
+		if(event.target.type === "textarea") {
+			let questions = [...this.state.questions];
+			questions[event.target.dataset.questionId].question = event.target.value; 
+			this.setState({ questions });
+		} else {
+			let questions = [...this.state.questions];
+			let { questionId, answerId } = event.target.dataset;
+			questions[questionId].answers[answerId] = event.target.value; 
+			this.setState({ questions });			
+		}
+	}
 
+	handleAdminSubmit = (event) => {
+		event.preventDefault();
+		const questions = [...this.state.questions]
+		localStorage.setItem("questions", JSON.stringify(questions));
+		// Do validation here
+		// Will need to set "saved" flag
+		// Also need to save to disk
+
+		// const isValid = true;
+		// if (isValid) {
+		// 	this.props.onQuizSubmit(event);
+		// } else {
+		// 	alert('invalid input');
+		// }
+	}
+
+	handlePollSubmit = (event) => {
+		event.preventDefault();
+		const questions = [...this.state.questions]
+		localStorage.setItem("questions", JSON.stringify(questions));
+	}
+
+	addQuestion = (event) => {
+		this.setState((prevState) => ({
+			questions: [...prevState.questions, { question: "", answers: [] }],
+		}));		
+	}
+
+	addAnswer = (event) => {
+		const questions = [...this.state.questions];
+		let { questionId } = event.target.dataset;
+		questions[questionId].answers = questions[questionId].answers.concat(" ");
+		this.setState({ questions });
+	}
+
+	selectAnswer = (event) => {
+		const questions = [...this.state.questions];
+		let { questionId, answerId } = event.target.dataset;
+		questions[questionId].selectedAnswer = answerId;
+		this.setState({ questions });
+	}
+	hydrateStateFromLocalStorage = () => {
+		for (let key in this.state) {
+			if (localStorage.hasOwnProperty(key)) {
+				let value = localStorage.getItem(key);
+        try {
+          value = JSON.parse(value);
+          this.setState({ [key]: value });
+        } catch (e) {
+          // handle empty string
+          this.setState({ [key]: value });
+				}
+			}
+		}
+	}
+	componentDidMount() {
+		this.hydrateStateFromLocalStorage();
+	}
 	render() {
 		return(
 		<Router>
@@ -33,10 +108,43 @@ class App extends React.Component {
 
 				<hr />
 				<Route exact path="/" component={Login} />
-				<Route exact path="/results" component={Results} />
-				<Route exact path="/poll" component={Poll} />
-				<Route exact path="/admin" component={Admin} />
-				<Route exact path="/login" component={Admin} />
+				<Route 
+					exact 
+					path="/results" 
+					render={(props) => (
+						<Results 
+							{...props}
+							questions={this.state.questions}
+						/>
+					)}
+				/>
+				<Route 
+					exact 
+					path="/poll" 
+					render={(props) => (
+						<Poll 
+							{...props} 
+							selectAnswer={this.selectAnswer} 
+							handleSubmit={this.handlePollSubmit}
+							questions={this.state.questions}
+						/>
+					)}
+				/>
+				<Route 
+					exact 
+					path="/admin" 
+					render={(props) => (
+						<Admin 
+							{...props} 
+							addAnswer={this.addAnswer} 
+							addQuestion={this.addQuestion} 
+							handleChange={this.handleAdminChange}
+							handleSubmit={this.handleAdminSubmit}
+							questions={this.state.questions}
+						/>
+					)}
+				/>
+				<Route exact path="/login" component={Login} />
 			</div>
 		</Router>
 	)}

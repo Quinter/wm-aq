@@ -2,45 +2,24 @@ import React from 'react';
 import EntryCard from './EntryCard';
 
 class Admin extends React.Component {
-	state = {
-		cards: [
-			{ question: "", answers: [] }
-		]	
-	}
 	handleChange = (event) => {
-		if(event.target.type === "textarea") {
-			let cards = [...this.state.cards];
-			console.log(event.target.dataset);
-			cards[event.target.dataset.questionId].question = event.target.value; 
-			this.setState({ cards });
-		} else {
-			let cards = [...this.state.cards];
-			let { questionId, answerId } = event.target.dataset;
-			cards[questionId].answers[answerId] = event.target.value; 
-			this.setState({ cards });			
-		}
+		this.props.handleChange(event);
 	}
 
 	handleSubmit = (event) => {
-		event.preventDefault();
+		this.props.handleSubmit(event);
 	}
 
-	addCard = () => {
-		this.setState((prevState) => ({
-			cards: [...prevState.cards, { question: "", answers: [] }],
-		}));		
+	addQuestion = (event) => {
+		this.props.addQuestion(event);
 	}
 
 	addAnswer = (event) => {
-		const cards = [...this.state.cards];
-		let { questionId } = event.target.dataset;
-		cards[questionId].answers = cards[questionId].answers.concat(" ");
-		// this is updating the entire state tree which is overkill, would want to refactor
-		this.setState({ cards });
-	}	
+		this.props.addAnswer(event);
+	}
 	render () {
-		const { cards } = this.state;
-		const questionCards = cards.map((value, index) => {
+		const { questions } = this.props;
+		const adminQuestions = questions.map((value, index) => {
 			return (
 				<EntryCard 
 					key={index}
@@ -55,8 +34,8 @@ class Admin extends React.Component {
 		return (
 			<div className="admin-container">
 				<h2>Admin</h2>
-				{questionCards}
-				<button onClick={this.addCard}>Add Question</button>
+				{adminQuestions}
+				<button onClick={this.addQuestion}>Add Question</button>
 			</div>
 		);
 	}

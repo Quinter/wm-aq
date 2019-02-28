@@ -5,7 +5,7 @@ class EntryCard extends React.Component {
 	addAnswer = (event) => {
 		this.props.addAnswer(event);
 	}
-
+	// TODO
 	removeAnswer = (event) => {
 
 	}
