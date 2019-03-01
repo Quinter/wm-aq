@@ -1,11 +1,12 @@
 import React from 'react';
+import { Card } from './Card';
 
 const ResultCard = (props) => {
 	return (
-		<div className="resultCard">
+		<Card className="resultCard">
 			<div>{props.question}</div>
 			<div>{props.answer}</div>
-		</div>
+		</Card>
 	)
 };
 

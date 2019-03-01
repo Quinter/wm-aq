@@ -1,4 +1,6 @@
 import React from 'react';
+import { Card } from './Card';
+
 
 class PollCard extends React.Component {
 
@@ -30,12 +32,12 @@ class PollCard extends React.Component {
 				)
 		})
 		return (
-			<div key={this.props.index} className="pollCard">
-				<h3>{question}</h3>
+			<Card key={this.props.index} {...this.props} className="pollCard">
+				{question}
 				<div className="answers-container">
 					{answerFields}
 				</div>
-			</div>
+			</Card>
 		);
 	}
 	

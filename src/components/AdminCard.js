@@ -1,6 +1,6 @@
 import React from 'react';
-
-class EntryCard extends React.Component {
+import { Card } from './Card';
+class AdminCard extends React.Component {
 
 	addAnswer = (event) => {
 		this.props.addAnswer(event);
@@ -23,17 +23,17 @@ class EntryCard extends React.Component {
 		const { answers, questionId } = this.props;
 		const answerFields = answers.map((value, index) => {
 				return (
-					<div key={index}>
-						<label htmlFor={index}>Answer {index + 1}</label>
+					<div key={index} className="answerContainer">
+						<label htmlFor={index}>Answer {index + 1}: </label>
 						<input type="text" data-answer-id={index} data-question-id={questionId} value={answers[index]} onChange={this.handleChange} />
 					</div>
 				)
 		})
 		return (
-			<div key={this.props.index} className="entryCard">
+			<Card key={this.props.index} {...this.props} className="adminCard">
 				<form onSubmit={this.handleSubmit} >
-					<label>Question
-						<textarea data-question-id={questionId} value={this.props.question} onChange={this.handleChange}/>
+					<label>Question:
+						<textarea  data-question-id={questionId} value={this.props.question} onChange={this.handleChange}/>
 					</label>
 					<div className="answers-container">
 						{answerFields}
@@ -41,10 +41,10 @@ class EntryCard extends React.Component {
 					<button data-question-id={questionId} onClick={this.addAnswer}>+</button>
 					<input data-question-id={questionId} type="submit" value="Submit" />
 				</form>
-			</div>
+			</Card>
 		);
 	}
 	
 }
 
-export default EntryCard;
+export default AdminCard;

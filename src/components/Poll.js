@@ -1,5 +1,6 @@
 import React from 'react';
 import PollCard from './PollCard';
+import { Page } from './Page';
 
 class Poll extends React.Component {
 
@@ -25,13 +26,13 @@ class Poll extends React.Component {
 			)
 	})
 		return (
-			<div className="pollContainer">
+			<Page className="pollPage">
 				<h2>Poll</h2>
 				<form onSubmit={this.handleSubmit} >
 					{pollQuestions}
-					<input type="submit" value="Submit" />
+					<input className="pollSubmit" type="submit" value="Submit" />
 				</form>
-			</div>
+			</Page>
 		);
 	}
 }

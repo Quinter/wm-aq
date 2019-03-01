@@ -13,7 +13,7 @@ import Login from './components/Login';
 class App extends React.Component {
 	state = {
 		questions: [
-			{ question: "", answers: [], selectedAnswer: null }
+			{ question: "", answers: ["", "", ""], selectedAnswer: null }
 		]	
 	}
 	handleAdminChange = (event) => {
@@ -33,9 +33,8 @@ class App extends React.Component {
 		event.preventDefault();
 		const questions = [...this.state.questions]
 		localStorage.setItem("questions", JSON.stringify(questions));
-		// Do validation here
-		// Will need to set "saved" flag
-		// Also need to save to disk
+		// TODO npm Do validation here
+		// Will need to set "saved" flag(?)
 
 		// const isValid = true;
 		// if (isValid) {
@@ -53,8 +52,13 @@ class App extends React.Component {
 
 	addQuestion = (event) => {
 		this.setState((prevState) => ({
-			questions: [...prevState.questions, { question: "", answers: [] }],
+			questions: [...prevState.questions, { question: "", answers: ["","",""] }],
 		}));		
+	}
+
+	// TODO 
+	removeQuestion = () => {
+
 	}
 
 	addAnswer = (event) => {
@@ -90,8 +94,8 @@ class App extends React.Component {
 	render() {
 		return(
 		<Router>
-			<div>
-			<ul>
+			<div >
+			<ul className="appHeader">
 					<li>
 						<Link to="/admin">Admin</Link>
 					</li>

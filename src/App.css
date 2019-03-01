@@ -2,32 +2,80 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
+.appHeader {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 40px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: left;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: white;	
 }
 
-.App-link {
-  color: #61dafb;
+.appHeader li {
+	list-style-type: none;
+	margin-left: 20px;
+	text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.appHeader li a {
+	text-decoration: none;
+	line-height: 40px;
+	color: white;
+}
+
+.page {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.card {
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+	border: 1px solid #eee;
+	border-radius: 5px;
+	width: 25%;
+	margin: 25px;
+	padding: 25px;
+	min-width: 250px;
+}
+
+.addQuestion {
+	margin: 25px;
+	padding: 25px;
+	min-width: 250px;
+	width: 25%;
+}
+
+h2 {
+	display: block;
+	width: 100vw;
+	margin-left: 25px;
+}
+
+textarea {
+	border: 1px solid #9f9f9f;
+	border-radius: 5px;
+	height: 50px;
+	width: 100%;
+	resize: none;
+}
+
+.answerContainer {
+	margin: 5px 0;
+}
+
+.pollPage form {
+	display: flex;
+}
+
+.pollPage .pollSubmit {
+	background-color: #3c3cea;
+	float: left;
+	margin: 25px;
+	min-width: 200px;
+	border-radius: 5px;
+	color: white;
+	font-weight: 600;
+	font-size: 1.4em;
 }

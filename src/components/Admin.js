@@ -1,5 +1,6 @@
 import React from 'react';
-import EntryCard from './EntryCard';
+import AdminCard from './AdminCard';
+import { Page } from './Page';
 
 class Admin extends React.Component {
 	handleChange = (event) => {
@@ -21,7 +22,7 @@ class Admin extends React.Component {
 		const { questions } = this.props;
 		const adminQuestions = questions.map((value, index) => {
 			return (
-				<EntryCard 
+				<AdminCard 
 					key={index}
 					questionId={index}
 					onQuestionSubmit={this.handleSubmit} 
@@ -32,11 +33,11 @@ class Admin extends React.Component {
 			)
 	})
 		return (
-			<div className="admin-container">
+			<Page className="adminPage">
 				<h2>Admin</h2>
 				{adminQuestions}
-				<button onClick={this.addQuestion}>Add Question</button>
-			</div>
+				<button className="addQuestion card" onClick={this.addQuestion}>Add Question</button>
+			</Page>
 		);
 	}
 	

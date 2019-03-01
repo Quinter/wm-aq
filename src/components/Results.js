@@ -1,5 +1,6 @@
 import React from 'react';
 import ResultCard from './ResultCard';
+import { Page } from './Page';
 
 class Results extends React.Component {
 	render() {
@@ -17,10 +18,10 @@ class Results extends React.Component {
 			)
 		})
 		return (
-			<div className="resultsContainer">
+			<Page className="resultsPage">
 				<h2>Results</h2>
 				{questionResults}
-			</div>
+			</Page>
 		)
 	}		
 }
