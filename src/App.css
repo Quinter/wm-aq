@@ -35,7 +35,7 @@
 	border: 1px solid #eee;
 	border-radius: 5px;
 	width: 25%;
-	margin: 25px;
+	margin: 20px;
 	padding: 25px;
 	min-width: 250px;
 	background: #ededed;
@@ -76,6 +76,7 @@ textarea {
 .answerContainer {
 	margin: 5px 0;
 	display: block;
+	clear: both;
 }
 
 .answerContainer input, .answerContainer label {
@@ -136,17 +137,24 @@ textarea {
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
 }
 .adminCard form {
-	display: block;
+	display: inline-block;
+	position: relative;
 	float: left;
 	clear: both;
 	height: 100%;
+	margin-bottom: 40px;
+}
+
+.adminCard.saved-true {
+	border: 2px solid #2bb028;
 }
 
 .submitQuestion{
 	display: block;
 	float: right;
-	position: relative;
-	bottom: 10px;
+	position: absolute;
+	bottom: 20px;
+	right: 22px;
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
 	border: none;
 	background: #2bb028;
@@ -172,15 +180,48 @@ textarea {
 	color: white;
 	font-weight: 600;
 	font-size: 1.4em;
+	min-height: 80px;
 }
 
 .pollCard .answerContainer input {
 	width: auto;
 	margin-left: 3px;
 }
+.invalidPollSubmit {
+	bottom: 2px;
+	display: block;
+	float: left;
+	color: red;
+	position: relative;
+
+}
 
 .invalidSubmit {
 	display: block;
 	float: left;
 	color: red;
+	position: relative;
+	bottom: 52px;
+}
+
+.successSubmit {
+	width: 100%;
+	text-align: center;
+	color: #2bb028;
+	font-weight: 500;
+	font-size: 1.2em;
+}
+
+.resultCard {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.resultCard .answerContainer {
+	text-align: center;
+	font-weight: 500;
+	color: #3c3cea;
+	font-size: 1.1em;
 }

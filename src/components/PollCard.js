@@ -38,7 +38,7 @@ class PollCard extends React.Component {
 					{answerFields}
 				</div>
 				{(invalid === "unselected") &&
-					<div className="invalidSubmit">Please select an answer before submitting</div>
+					<div className="invalidPollSubmit">Please select an answer before submitting</div>
 				}
 			</Card>
 		);

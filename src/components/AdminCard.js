@@ -27,7 +27,7 @@ class AdminCard extends React.Component {
 	}
 
 	render () {
-		const { answers, questionId, invalid } = this.props;
+		const { answers, questionId, invalid,saved } = this.props;
 		const answerFields = answers.map((value, index) => {
 				return (
 					<div key={index} className="answerContainer">
@@ -51,7 +51,7 @@ class AdminCard extends React.Component {
 				)
 		})
 		return (
-			<Card key={this.props.index} {...this.props} className="adminCard">
+			<Card key={this.props.index} {...this.props} className={`adminCard saved-${saved}`}>
 				<form data-question-id={questionId} onSubmit={this.handleSubmit}  >
 					<button className="removeQuestion" data-question-id={questionId} onClick={this.removeQuestion}>x</button>
 					<label className="questionLabel">Question:

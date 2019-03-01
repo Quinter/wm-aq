@@ -73,8 +73,10 @@ class App extends React.Component {
 				this.setState({questions});
 			}
 		}
+		let submittedPoll = true;
 		this.setState({submittedPoll: true})
 		localStorage.setItem("questions", JSON.stringify(questions));
+		localStorage.setItem("submittedPoll", JSON.stringify(submittedPoll));
 	}
 
 	addQuestion = (event) => {
@@ -171,6 +173,7 @@ class App extends React.Component {
 							selectAnswer={this.selectAnswer} 
 							handleSubmit={this.handlePollSubmit}
 							questions={this.state.questions}
+							submittedPoll={this.state.submittedPoll}
 						/>
 					)}
 				/>

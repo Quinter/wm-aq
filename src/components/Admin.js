@@ -44,6 +44,7 @@ class Admin extends React.Component {
 					question={value.question}
 					answers={value.answers}
 					invalid={value.invalid}
+					saved={value.saved}
 					/>
 			)
 	})

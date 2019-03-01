@@ -20,10 +20,10 @@ class Results extends React.Component {
 		return (
 			<Page className="resultsPage">
 				{submittedPoll &&
-					<div>
+					<React.Fragment>
 						<h2>Results</h2>
 						{questionResults}
-					</div>
+					</React.Fragment>
 				}
 
 				{!submittedPoll &&
