@@ -23,8 +23,12 @@ class Poll extends React.Component {
 						selectAnswer={this.selectAnswer}
 						selectedAnswer={value.selectedAnswer}
 						question={value.question}
-						answers={value.answers}/>
+						answers={value.answers}
+						invalid={value.invalid}
+					/>
 				)
+			} else {
+				return false;
 			}
 	})
 		return (

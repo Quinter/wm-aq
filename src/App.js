@@ -8,7 +8,7 @@ import './App.css';
 import Admin from './components/Admin';
 import Results from './components/Results';
 import Poll from './components/Poll';
-import Login from './components/Login';
+import { Welcome } from './components/Welcome';
 
 class App extends React.Component {
 	state = {
@@ -18,6 +18,7 @@ class App extends React.Component {
 		]	
 	}
 	handleAdminChange = (event) => {
+		event.preventDefault();
 		if(event.target.type === "textarea") {
 			let questions = [...this.state.questions];
 			questions[event.target.dataset.questionId].question = event.target.value; 
@@ -31,6 +32,7 @@ class App extends React.Component {
 	}
 
 	handleAdminSubmit = (event) => {
+		console.log('admin submit')
 		event.preventDefault();
 		const questions = [...this.state.questions];
 		let { questionId } = event.target.dataset;
@@ -46,7 +48,7 @@ class App extends React.Component {
 		for (let answer of answers) {
 			if (/^\s+$/.test(answer) || !answer) {
 				console.log('invalid answer');
-				question.invalid = "valid";
+				question.invalid = "answer";
 				this.setState({questions});
 				return false;
 			}
@@ -63,11 +65,12 @@ class App extends React.Component {
 		for (let question of questions) {
 			let selectedAnswer = question.selectedAnswer;
 			if (!selectedAnswer) {
-				console.log('must select answer to each question');
-				console.log(question);
 				question.invalid = "unselected";
 				this.setState({questions});
 				return false;
+			} else {
+				question.invalid = false;
+				this.setState({questions});
 			}
 		}
 		this.setState({submittedPoll: true})
@@ -82,9 +85,13 @@ class App extends React.Component {
 		}));		
 	}
 
-	// TODO 
-	removeQuestion = () => {
-
+	removeQuestion = (event) => {
+		const questions = [...this.state.questions];
+		let { questionId } = event.target.dataset;
+		console.log(questions);
+		questions.splice(questionId, 1);
+		console.log(questions);
+		this.setState({ questions });
 	}
 
 	addAnswer = (event) => {
@@ -93,6 +100,15 @@ class App extends React.Component {
 		questions[questionId].answers = questions[questionId].answers.concat(" ");
 		this.setState({ questions });
 	}
+
+	removeAnswer = (event) => {
+		const questions = [...this.state.questions];
+		let { questionId, answerId } = event.target.dataset;
+		console.log(questions);
+		questions[questionId].answers.splice(answerId, 1);
+		console.log(questions);
+		this.setState({ questions });
+	}	
 
 	selectAnswer = (event) => {
 		const questions = [...this.state.questions];
@@ -131,13 +147,10 @@ class App extends React.Component {
 					<li>
 						<Link to="/results">Results</Link>
 					</li>
-					<li>
-						<Link to="/login">Login</Link>
-					</li>
 				</ul>
 
 				<hr />
-				<Route exact path="/" component={Login} />
+				<Route exact path="/" component={Welcome} />
 				<Route 
 					exact 
 					path="/results" 
@@ -167,15 +180,16 @@ class App extends React.Component {
 					render={(props) => (
 						<Admin 
 							{...props} 
-							addAnswer={this.addAnswer} 
+							addAnswer={this.addAnswer}
+							removeAnswer={this.removeAnswer}
 							addQuestion={this.addQuestion} 
+							removeQuestion={this.removeQuestion} 
 							handleChange={this.handleAdminChange}
 							handleSubmit={this.handleAdminSubmit}
 							questions={this.state.questions}
 						/>
 					)}
 				/>
-				<Route exact path="/login" component={Login} />
 			</div>
 		</Router>
 	)}

@@ -13,7 +13,7 @@ class PollCard extends React.Component {
 	}
 
 	render () {
-		const { answers, question, questionId, selectedAnswer } = this.props;
+		const { answers, question, questionId, selectedAnswer, invalid } = this.props;
 		
 		const answerFields = answers.map((value, index) => {
 			// this is why should be checking proptypes
@@ -34,9 +34,12 @@ class PollCard extends React.Component {
 		return (
 			<Card key={this.props.index} {...this.props} className="pollCard">
 				<div className="questionLabel">{question}</div>
-				<div className="answers-container">
+				<div className="answersContainer">
 					{answerFields}
 				</div>
+				{(invalid === "unselected") &&
+					<div className="invalidSubmit">Please select an answer before submitting</div>
+				}
 			</Card>
 		);
 	}

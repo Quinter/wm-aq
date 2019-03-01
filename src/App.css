@@ -65,8 +65,70 @@ textarea {
 	resize: none;
 }
 
+.answersContainer {
+	float: left;
+	display: block;
+	clear: both;
+	margin-bottom: 15px;
+}
+
 .answerContainer {
 	margin: 5px 0;
+	display: block;
+}
+
+.answerContainer input, .answerContainer label {
+	display: inline-block;
+	float: left;
+}
+.answerContainer input {
+	width: 80%;
+}
+
+.removeAnswer {
+	border-radius: 12px;
+	height: 24px;
+	width: 24px;
+	background: red;
+	display: inline;
+	float:right;
+	background: #ec4479;
+	text-align: center;
+	font-size: 12px;
+	line-height: 8px;
+	color: white;
+	border: none;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+
+}
+
+.removeQuestion {
+	top: -12px;
+	position: relative;
+	border-radius: 16px;
+	height: 32px;
+	width: 32px;
+	background: red;
+	display: inline;
+	float:right;
+	background: #ec4479;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 12px;
+	color: white;
+	border: none;
+	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+}
+
+.addAnswer {
+	display: block;
+	float: left;
+}
+
+.submitQuestion{
+	display: block;
+	float: right;
 }
 
 .pollPage form {
@@ -82,4 +144,15 @@ textarea {
 	color: white;
 	font-weight: 600;
 	font-size: 1.4em;
+}
+
+.pollCard .answerContainer input {
+	width: auto;
+	margin-left: 3px;
+}
+
+.invalidSubmit {
+	display: block;
+	float: left;
+	color: red;
 }

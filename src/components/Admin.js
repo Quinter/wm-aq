@@ -4,10 +4,12 @@ import { Page } from './Page';
 
 class Admin extends React.Component {
 	handleChange = (event) => {
+		event.preventDefault();
 		this.props.handleChange(event);
 	}
 
 	handleSubmit = (event) => {
+		event.preventDefault();
 		this.props.handleSubmit(event);
 	}
 
@@ -18,6 +20,15 @@ class Admin extends React.Component {
 	addAnswer = (event) => {
 		this.props.addAnswer(event);
 	}
+
+	removeAnswer = (event) => {
+		this.props.removeAnswer(event);
+	}
+
+	removeQuestion = (event) => {
+		this.props.removeQuestion(event);
+	}
+
 	render () {
 		const { questions } = this.props;
 		const adminQuestions = questions.map((value, index) => {
@@ -28,6 +39,8 @@ class Admin extends React.Component {
 					onQuestionSubmit={this.handleSubmit} 
 					onQuestionChange={this.handleChange}
 					addAnswer={this.addAnswer}
+					removeAnswer={this.removeAnswer}
+					removeQuestion={this.removeQuestion}
 					question={value.question}
 					answers={value.answers}
 					invalid={value.invalid}
