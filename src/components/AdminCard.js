@@ -66,7 +66,6 @@ class AdminCard extends React.Component {
 						data-question-id={questionId}
 						type="submit" 
 						value="Submit" 
-						
 					/>
 				</form>
 				{ invalid &&
