@@ -20,7 +20,7 @@ class AdminCard extends React.Component {
 	}
 
 	render () {
-		const { answers, questionId } = this.props;
+		const { answers, questionId, invalid } = this.props;
 		const answerFields = answers.map((value, index) => {
 				return (
 					<div key={index} className="answerContainer">
@@ -31,8 +31,8 @@ class AdminCard extends React.Component {
 		})
 		return (
 			<Card key={this.props.index} {...this.props} className="adminCard">
-				<form onSubmit={this.handleSubmit} >
-					<label>Question:
+				<form data-question-id={questionId} onSubmit={this.handleSubmit} >
+					<label className="questionLabel">Question:
 						<textarea  data-question-id={questionId} value={this.props.question} onChange={this.handleChange}/>
 					</label>
 					<div className="answers-container">
@@ -41,6 +41,9 @@ class AdminCard extends React.Component {
 					<button data-question-id={questionId} onClick={this.addAnswer}>+</button>
 					<input data-question-id={questionId} type="submit" value="Submit" />
 				</form>
+				{ invalid &&
+					<div className="invalidSubmit">A {invalid} field is blank, please complete before submitting</div>
+				}
 			</Card>
 		);
 	}

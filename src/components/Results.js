@@ -4,7 +4,7 @@ import { Page } from './Page';
 
 class Results extends React.Component {
 	render() {
-		const { questions } = this.props;
+		const { questions, submittedPoll } = this.props;
 		const questionResults = questions.map((value, index) => {
 			let { question, selectedAnswer} = value;
 			let answer = value.answers[selectedAnswer];
@@ -19,8 +19,16 @@ class Results extends React.Component {
 		})
 		return (
 			<Page className="resultsPage">
-				<h2>Results</h2>
-				{questionResults}
+				{submittedPoll &&
+					<div>
+						<h2>Results</h2>
+						{questionResults}
+					</div>
+				}
+
+				{!submittedPoll &&
+					<div>No Valid Poll has been submitted.  Please answer all questions at /poll</div>
+				}
 			</Page>
 		)
 	}		

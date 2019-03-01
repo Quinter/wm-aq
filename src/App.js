@@ -12,8 +12,9 @@ import Login from './components/Login';
 
 class App extends React.Component {
 	state = {
+		submittedPoll: false,
 		questions: [
-			{ question: "", answers: ["", "", ""], selectedAnswer: null }
+			{ question: "Example Question?", answers: ["A", "B", "C"], selectedAnswer: null, invalid: "", saved: false }
 		]	
 	}
 	handleAdminChange = (event) => {
@@ -31,28 +32,53 @@ class App extends React.Component {
 
 	handleAdminSubmit = (event) => {
 		event.preventDefault();
-		const questions = [...this.state.questions]
+		const questions = [...this.state.questions];
+		let { questionId } = event.target.dataset;
+		let question = questions[questionId];
+		let questionText = question.question;
+		let { answers } = question;
+		if (/^\s+$/.test(questionText) || !questionText) {
+			console.log('invalid question');
+			question.invalid = "question";
+			this.setState({questions});
+			return false;
+		}
+		for (let answer of answers) {
+			if (/^\s+$/.test(answer) || !answer) {
+				console.log('invalid answer');
+				question.invalid = "valid";
+				this.setState({questions});
+				return false;
+			}
+		}
+		question.invalid = false;
+		question.saved = true;
+		this.setState({questions});
 		localStorage.setItem("questions", JSON.stringify(questions));
-		// TODO npm Do validation here
-		// Will need to set "saved" flag(?)
-
-		// const isValid = true;
-		// if (isValid) {
-		// 	this.props.onQuizSubmit(event);
-		// } else {
-		// 	alert('invalid input');
-		// }
 	}
 
 	handlePollSubmit = (event) => {
 		event.preventDefault();
 		const questions = [...this.state.questions]
+		for (let question of questions) {
+			let selectedAnswer = question.selectedAnswer;
+			if (!selectedAnswer) {
+				console.log('must select answer to each question');
+				console.log(question);
+				question.invalid = "unselected";
+				this.setState({questions});
+				return false;
+			}
+		}
+		this.setState({submittedPoll: true})
 		localStorage.setItem("questions", JSON.stringify(questions));
 	}
 
 	addQuestion = (event) => {
 		this.setState((prevState) => ({
-			questions: [...prevState.questions, { question: "", answers: ["","",""] }],
+			questions: 
+				[...prevState.questions, 
+				{ question: "", answers: ["","",""], selectedAnswer: null, invalid: "", saved: false }],
 		}));		
 	}
 
@@ -119,6 +145,7 @@ class App extends React.Component {
 						<Results 
 							{...props}
 							questions={this.state.questions}
+							submittedPoll={this.state.submittedPoll}
 						/>
 					)}
 				/>

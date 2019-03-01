@@ -15,15 +15,17 @@ class Poll extends React.Component {
 	render () {
 		const { questions } = this.props;
 		const pollQuestions = questions.map((value, index) => {
-			return (
-				<PollCard 
-					key={index}
-					questionId={index}
-					selectAnswer={this.selectAnswer}
-					selectedAnswer={value.selectedAnswer}
-					question={value.question}
-					answers={value.answers}/>
-			)
+			if (value.saved) {
+				return (
+					<PollCard 
+						key={index}
+						questionId={index}
+						selectAnswer={this.selectAnswer}
+						selectedAnswer={value.selectedAnswer}
+						question={value.question}
+						answers={value.answers}/>
+				)
+			}
 	})
 		return (
 			<Page className="pollPage">

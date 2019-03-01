@@ -47,6 +47,10 @@
 	width: 25%;
 }
 
+form {
+	flex-wrap: wrap;
+}
+
 h2 {
 	display: block;
 	width: 100vw;

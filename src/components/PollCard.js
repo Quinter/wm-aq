@@ -19,7 +19,7 @@ class PollCard extends React.Component {
 			// this is why should be checking proptypes
 			let isChecked = parseInt(selectedAnswer) === index;
 				return (
-					<div key={index}>
+					<div key={index} className="answerContainer">
 						<input type="radio" 
 							data-answer-id={index} 
 							data-question-id={questionId} 
@@ -33,7 +33,7 @@ class PollCard extends React.Component {
 		})
 		return (
 			<Card key={this.props.index} {...this.props} className="pollCard">
-				{question}
+				<div className="questionLabel">{question}</div>
 				<div className="answers-container">
 					{answerFields}
 				</div>

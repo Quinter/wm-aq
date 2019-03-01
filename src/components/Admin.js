@@ -29,7 +29,9 @@ class Admin extends React.Component {
 					onQuestionChange={this.handleChange}
 					addAnswer={this.addAnswer}
 					question={value.question}
-					answers={value.answers}/>
+					answers={value.answers}
+					invalid={value.invalid}
+					/>
 			)
 	})
 		return (

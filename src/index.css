@@ -12,3 +12,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.questionLabel {
+	font-weight: 500;
+	font-size: 1.2em;
+}
